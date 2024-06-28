@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TechnicalAxos_JuanCastrejonDiaz"
+             x:Class="TechnicalAxos_JuanCastrejonDiaz.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F0F0F0">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView Scrolled="OnScrollViewScrolled">
+        <VerticalStackLayout
+            Spacing="20"
+            Padding="20"
+            VerticalOptions="Start">
+
+            <!-- Header -->
+            <Frame BackgroundColor="#007ACC" Padding="15" CornerRadius="10" HorizontalOptions="FillAndExpand">
+                <Label
+                    Text="TechnicalAxos - Juan Castrejon Diaz"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="White"/>
+            </Frame>
+
+            <!-- Package ID -->
+            <Label
+                Text="{Binding PackageId}"
+                FontSize="20"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                Margin="0,20,0,20"/>
+
+            <!-- Image -->
+            <Frame Padding="4" BorderColor="#007ACC" CornerRadius="10" HeightRequest="300" HorizontalOptions="Center">
+                <Image x:Name="openGallery" HeightRequest="300" WidthRequest="300" Source="https://random.dog/af70ad75-24af-4518-bf03-fec4a997004c.jpg">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnChooseImageClicked" NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+
+            <!-- Button -->
+            <Button
+                Text="Choose an image"
+                BackgroundColor="#007ACC"
+                TextColor="White"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"
+                Clicked="OnChooseImageClicked"
+                CornerRadius="20"
+                Padding="10,5"/>
+
+            <!-- ListView -->
+            <Frame BorderColor="#007ACC" CornerRadius="10" Padding="0" Margin="0,20,0,20">
+                <ListView ItemsSource="{Binding Countries}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      BackgroundColor="White">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BorderColor="#E0E0E0" CornerRadius="10" Padding="10" Margin="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="{Binding Flags.Png}" HeightRequest="40" WidthRequest="60" VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" Text="{Binding Name.Common}" FontSize="Medium" VerticalOptions="Center" Margin="10,0,0,0" TextColor="Black"/>
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
